@@ -1,26 +1,34 @@
 package com.springboot.studyhyeonwook.web.controller.api.board;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.studyhyeonwook.service.board.BoardService;
+import com.springboot.studyhyeonwook.web.dto.board.CreateBoardReqDto;
+
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/api/v1/board")
+@RequiredArgsConstructor
 public class BoardController {
 	
-	//게시글 작성
+	private final BoardService boardService;
+	
+	//게시글 작성	뒤에 번호를 안줌 -> 번호가 DB의 인덱스이기때문 
 	@PostMapping("/content")
-	public ResponseEntity<?> addBoard(@RequestParam("title") String title){
-		System.out.println("게시글 작성 요청");
-		System.out.println("title: " + title);
-		HttpHeaders headers = new HttpHeaders();
-		
-		headers.set("ContentType", "text/html;charset=utf-8");
-		return ResponseEntity.ok().headers(headers).body("test");
+	public ResponseEntity<?> addBoard(CreateBoardReqDto createBoardReqDto) {	
+		boolean responseData = false;
+		try {
+			boardService.createBoard(createBoardReqDto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.internalServerError().body(responseData);
+		}
+		return ResponseEntity.ok().body(responseData);	// 밑과 같음
 //		return new ResponseEntity<>(title + "게시글 작성 성공",headers, HttpStatus.BAD_REQUEST);
 	}
 	
