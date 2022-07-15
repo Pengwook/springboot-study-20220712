@@ -2,6 +2,7 @@ package com.springboot.studyhyeonwook.web.controller.api.board;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +21,8 @@ public class BoardController {
 	
 	//게시글 작성	뒤에 번호를 안줌 -> 번호가 DB의 인덱스이기때문 
 	@PostMapping("/content")
-	public ResponseEntity<?> addBoard(CreateBoardReqDto createBoardReqDto) {	
+	public ResponseEntity<?> addBoard(@RequestBody CreateBoardReqDto createBoardReqDto) {	// json만 @RequestBody붙여줘야함
+		
 		boolean responseData = false;
 		try {
 			boardService.createBoard(createBoardReqDto);
