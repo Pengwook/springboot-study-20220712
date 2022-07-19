@@ -23,14 +23,33 @@
   			bm.boardcode,
   			bm.title,
   			bm.usercode,
-  			bm.username,
+  			um.username,
   			bm.content,
-  			bm.ceratedate,
+  			bm.createdate,
   			bm.updatedate
-  		form
+  		from
   			board_mst bm
   			left outer join user_mst um on (um.usercode = bm.usercode)
   		where
   			bm.boardcode = #{boardcode}
+  			
+  	</select>
+  	
+  	<select id="getBoardListOfPage" parameterType="Integer" resultType="com.springboot.studyhyeonwook.domain.board.Board">
+  		select
+  			bm.boardcode,
+  			bm.title,
+  			bm.usercode,
+  			um.username,
+  			bm.content,
+  			bm.createdate,
+  			bm.updatedate
+  		from
+  			board_mst bm
+  			left outer join user_mst um on (um.usercode = bm.usercode)
+  		order by 
+  			bm.createdate desc,
+  			bm.boardcode desc
+  		limit #{index}, 10
   	</select>
   </mapper>
