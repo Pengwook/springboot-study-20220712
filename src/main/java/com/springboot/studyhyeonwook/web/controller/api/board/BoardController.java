@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.studyhyeonwook.service.board.BoardService;
+import com.springboot.studyhyeonwook.web.dto.CMRespDto;
 import com.springboot.studyhyeonwook.web.dto.board.CreateBoardReqDto;
+import com.springboot.studyhyeonwook.web.dto.board.CreateBoardRespDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,15 +24,15 @@ public class BoardController {
 	//게시글 작성	뒤에 번호를 안줌 -> 번호가 DB의 인덱스이기때문 
 	@PostMapping("/content")
 	public ResponseEntity<?> addBoard(@RequestBody CreateBoardReqDto createBoardReqDto) {	// json만 @RequestBody붙여줘야함
+		CreateBoardRespDto createBoardRespDto = null;
 		
-		boolean responseData = false;
 		try {
-			boardService.createBoard(createBoardReqDto);
+			createBoardRespDto = boardService.createBoard(createBoardReqDto);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResponseEntity.internalServerError().body(responseData);
+			return ResponseEntity.internalServerError().body(new CMRespDto<>(1, "게시글 등록 실패", createBoardRespDto));
 		}
-		return ResponseEntity.ok().body(responseData);	// 밑과 같음
+		return ResponseEntity.ok().body(new CMRespDto<>(1, "게시글 등록 성공", createBoardRespDto));
 //		return new ResponseEntity<>(title + "게시글 작성 성공",headers, HttpStatus.BAD_REQUEST);
 	}
 	
