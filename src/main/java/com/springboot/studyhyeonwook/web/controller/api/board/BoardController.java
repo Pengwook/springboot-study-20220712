@@ -44,7 +44,7 @@ public class BoardController {
 	public ResponseEntity<?> getBoard(@PathVariable int boardcode) {
 		ReadBoardRespDto readBoardRespDto = null;
 		try {
-			readBoardRespDto = boardService.readBoard(boardcode);
+			readBoardRespDto = boardService.readBoard(boardcode);	
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.ok().body(new CMRespDto<>(-1, "게시글 조회 실패", readBoardRespDto));
