@@ -6,6 +6,7 @@ import com.springboot.studyhyeonwook.domain.board.Board;
 import com.springboot.studyhyeonwook.domain.board.BoardRepository;
 import com.springboot.studyhyeonwook.web.dto.board.CreateBoardReqDto;
 import com.springboot.studyhyeonwook.web.dto.board.CreateBoardRespDto;
+import com.springboot.studyhyeonwook.web.dto.board.ReadBoardRespDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,7 +25,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public ReadBoardRespDto(int boardcode) throws Exception {
+	public ReadBoardRespDto readBoard(int boardcode) throws Exception {
 		return null;
 	}
 	
