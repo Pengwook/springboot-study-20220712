@@ -1,5 +1,8 @@
 package com.springboot.studyhyeonwook.service.board;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.springboot.studyhyeonwook.domain.board.Board;
@@ -30,9 +33,14 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public ReadBoardRespDto readBoardList(int page) throws Exception {
+	public List<ReadBoardRespDto> readBoardList(int page) throws Exception {
+		List<ReadBoardRespDto> BoardDtoList = new ArrayList<ReadBoardRespDto>();	// 비어있는 리스트 생성
 		
-		return null;
+		boardRepository.getBoardListOfIndex((page - 1) * 10).forEach(board -> {
+			BoardDtoList.add(board.toReadBoardDto());
+		});
+		
+		return BoardDtoList;
 	}
 	
 	@Override

@@ -35,7 +35,7 @@
   			
   	</select>
   	
-  	<select id="getBoardListOfPage" parameterType="Integer" resultType="com.springboot.studyhyeonwook.domain.board.Board">
+  	<select id="getBoardListOfIndex" parameterType="Integer" resultType="com.springboot.studyhyeonwook.domain.board.Board">	
   		select
   			bm.boardcode,
   			bm.title,
